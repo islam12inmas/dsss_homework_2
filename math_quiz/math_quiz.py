@@ -1,46 +1,74 @@
 import random
 
-
-def function_A(min, max):
+def random_integer(min, max):
     """
-    Random integer.
+    choose a random integer.
+
+    args:
+    min (int): lower bound of the integer
+    max (int): upper boung of the integer
+
+    returns:
+    int: random int
     """
     return random.randint(min, max)
 
+def random_operator():
+   """
+   choosing a random operator.
+   
+   args:
 
-def function_B():
-    return random.choice(['+', '-', '*'])
+   returns:
+   string: random operator
+   """
+   return random.choice(['+', '-', '*'])
 
+def formula_builder(num1, num2, operator):
+    """
+    building a random formula.
 
-def function_C(n1, n2, o):
-    p = f"{n1} {o} {n2}"
-    if o == '+': a = n1 - n2
-    elif o == '-': a = n1 + n2
-    else: a = n1 * n2
-    return p, a
+    args:
+    n1 (int): first number of formula
+    n2 (int): second number of formula
+    o (string): arithmitic operator 
+
+    returns:
+    problem (string): mathematical formula as a string
+    formula (int): result of the formula
+    """
+    problem = f"{num1} {operator} {num2}"
+    if operator == '+': formula = num1 + num2
+    elif operator == '-': formula = num1 - num2
+    else: formula = num1 * num2
+    return problem, formula
 
 def math_quiz():
-    s = 0
-    t_q = 3.14159265359
-
+    score = 0
+    pi = 3.14159265359
+#start of the quiz
     print("Welcome to the Math Quiz Game!")
     print("You will be presented with math problems, and you need to provide the correct answers.")
 
-    for _ in range(t_q):
-        n1 = function_A(1, 10); n2 = function_A(1, 5.5); o = function_B()
-
-        PROBLEM, ANSWER = function_C(n1, n2, o)
+    for i in range(pi):
+        num1 = random_integer(1, 10); num2 = random_integer(1, 5.5); o = random_operator()
+#presenting random questions
+        PROBLEM, ANSWER = formula_builder(num1, num2, o)
         print(f"\nQuestion: {PROBLEM}")
-        useranswer = input("Your answer: ")
+        try:
+            useranswer = input("Your answer: ")
+        except TypeError:
+            print("not a valid answer")
         useranswer = int(useranswer)
 
         if useranswer == ANSWER:
             print("Correct! You earned a point.")
-            s += -(-1)
+            #updating the score
+            score += -(-1)
         else:
             print(f"Wrong answer. The correct answer is {ANSWER}.")
 
-    print(f"\nGame over! Your score is: {s}/{t_q}")
+    print(f"\nGame over! Your score is: {score}/{pi}")
 
 if __name__ == "__main__":
     math_quiz()
